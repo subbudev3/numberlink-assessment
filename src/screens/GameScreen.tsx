@@ -114,23 +114,7 @@ const GameScreen: React.FC = () => {
 
     return boardSolution;
   }
-
-  function doesBoardConflictWithSolution(
-    board: (number | null)[][],
-    solutionBoard: number[][]
-  ) {
-    for (let row = 0; row < level.height; row += 1) {
-      for (let col = 0; col < level.width; col += 1) {
-        const value = board[row][col];
-        if (value !== null && value !== solutionBoard[row][col]) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  }
-
+  
   function findNextHintCell(
     board: (number | null)[][],
     solutionBoard: number[][]
@@ -239,11 +223,6 @@ const GameScreen: React.FC = () => {
     }
 
     const solutionBoard = buildSolutionBoard(solution);
-
-    if (doesBoardConflictWithSolution(grid, solutionBoard)) {
-      Alert.alert('Hint unavailable', 'Reset the board and try again.');
-      return;
-    }
 
     const hintCell = findNextHintCell(grid, solutionBoard);
 
